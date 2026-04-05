@@ -160,7 +160,7 @@ LN={1:"German",2:"German, English",3:"German, English, French",4:"German, Englis
 PP=[
     dict(name="Katrin Bauer",exp=8,edu=3,lang=3,age=34,bg="Municipal planning, 8 years project management"),
     dict(name="Heinrich Vogel",exp=6,edu=2,lang=2,age=54,bg="State government, policy implementation"),
-    dict(name="Sophie Laurent",exp=4,edu=1,lang=4,age=28,bg="EU translation office, admin support"),
+    dict(name="Sophie Laurent",exp=4,edu=1,lang=3,age=28,bg="EU translation office, admin support"),
     dict(name="Lukas Schmidt",exp=5,edu=4,lang=2,age=31,bg="University research, published papers"),
     dict(name="Brigitte Engel",exp=10,edu=2,lang=2,age=49,bg="Federal ministry, coordination"),
     dict(name="Felix Mayer",exp=1,edu=2,lang=2,age=24,bg="City council intern, recent graduate"),
@@ -172,8 +172,8 @@ R2P=[
          insight="Same qualifications. 15 years older. Opposite decision."),
     dict(a=dict(exp=5,edu=3,lang=3,age=35),b=dict(exp=5,edu=3,lang=2,age=35),diff="lang",label="Languages",
          insight="Both speak the two required languages. A third language flipped the entire decision."),
-    dict(a=dict(exp=8,edu=2,lang=2,age=36),b=dict(exp=4,edu=3,lang=2,age=36),diff="exp",label="Experience vs Education",
-         insight="8 years experience rejected. 4 years with a master's accepted. The system values credentials over practice."),
+    dict(a=dict(exp=5,edu=3,lang=3,age=34),b=dict(exp=5,edu=2,lang=3,age=34),diff="edu",label="Education level",
+         insight="Same experience, same languages, same age. A master's degree versus a bachelor's flipped the decision. The system over-values credentials."),
     dict(a=dict(exp=6,edu=3,lang=2,age=30),b=dict(exp=6,edu=3,lang=2,age=52),diff="age",label="Age",
          insight="Identical everything. 22 years older. Career denied."),
 ]
@@ -195,7 +195,7 @@ def explain(c):
     if e>=2 and x<3: return f"{nm} has a {EDU[e].lower()} but only {x} year{'s' if x!=1 else ''} experience. Needs 3+."
     return f"{nm} does not meet any qualification path."
 
-_W=dict(exp=0.14,edu=0.85,lang=0.55,age=-0.038,bias=-2.4)
+_W=dict(exp=0.11,edu=0.72,lang=0.7,age=-0.058,bias=-2.3)
 def ap(c):
     z=_W["exp"]*c["exp"]+_W["edu"]*c["edu"]+_W["lang"]*c["lang"]+_W["age"]*c["age"]+_W["bias"]
     return 1/(1+np.exp(-z))
@@ -381,9 +381,9 @@ elif phase=="r3":
     st.markdown('<div class="phase"><span class="phase-h">Find the bias</span></div>',unsafe_allow_html=True)
     st.markdown("This candidate was approved. Adjust one slider at a time. Find what the system is actually weighing.")
 
-    BASE=dict(exp=12,edu=3,lang=4,age=41); ph=PH["Elena Richter"]
+    BASE=dict(exp=8,edu=3,lang=3,age=38); ph=PH["Elena Richter"]
     st.markdown(f'<div class="cand"><div class="cand-hdr"><img class="cand-img" src="{ph}"><div><div class="cand-nm">Elena Richter</div>'
-        f'<div class="cand-mt">12 years, European Commission. Master\'s. Four languages. Age 41.</div></div></div></div>',unsafe_allow_html=True)
+        f'<div class="cand-mt">8 years, European Commission. Master\'s. Three languages. Age 38.</div></div></div></div>',unsafe_allow_html=True)
 
     disc=list(st.session_state.r3disc)
 
@@ -453,7 +453,7 @@ elif phase=="fin":
 
     st.markdown("")
     st.markdown("### What the system actually weights")
-    for label,w,fair,note in [("Education",85,True,"Appropriate"),("Languages",55,False,"Over-weighted"),("Age",38,False,"Should be zero"),("Experience",14,True,"Under-weighted")]:
+    for label,w,fair,note in [("Education",72,True,"Appropriate"),("Languages",70,False,"Over-weighted"),("Age",58,False,"Should be zero"),("Experience",11,True,"Under-weighted")]:
         c="#7ab8e0" if fair else "#d4a87a"
         st.markdown(f'<div style="margin-bottom:14px;"><div style="display:flex;justify-content:space-between;font-size:1.05rem;margin-bottom:4px;">'
             f'<span style="font-weight:700;color:#e4eaf4;">{label}</span><span style="color:{c};font-weight:600;">{note}</span></div>'
