@@ -47,7 +47,7 @@ st.markdown("""
     .sb-num { font-family: 'Instrument Serif', Georgia, serif; font-size: 2.4rem; color: #e4eaf4; }
     .sb-label { font-size: 0.85rem; color: #4e5d74; font-weight: 600; margin-top: 4px; }
     .sb-cell.w { border-bottom: 4px solid #5b9bd5; }
-    .sb-cell.l { border-bottom: 4px solid #c45a50; }
+    .sb-cell.l { border-bottom: 4px solid #c48a5a; }
     .sb-cell.t { border-bottom: 4px solid #4e5d74; }
 
     .cand { background: #0f1520; border: 2px solid #1a2436; margin-bottom: 24px; overflow: hidden; }
@@ -65,30 +65,24 @@ st.markdown("""
     .fb { display: flex; margin: 20px 0; }
     .fb-bar { width: 8px; flex-shrink: 0; }
     .fb-body { padding: 20px 28px; flex: 1; font-size: 1rem; line-height: 1.7; }
-    .fb-ok .fb-bar { background: #3a9a5a; } .fb-ok .fb-body { background: rgba(58,154,90,0.06); color: #6ec48a; }
-    .fb-bad .fb-bar { background: #c45a50; } .fb-bad .fb-body { background: rgba(196,90,80,0.06); color: #d4827a; }
+    .fb-ok .fb-bar { background: #3a7aaa; } .fb-ok .fb-body { background: rgba(90,155,210,0.06); color: #7ab8e0; }
+    .fb-bad .fb-bar { background: #c48a5a; } .fb-bad .fb-body { background: rgba(196,138,90,0.06); color: #d4a87a; }
     .fb-info .fb-bar { background: #5b9bd5; } .fb-info .fb-body { background: rgba(91,155,213,0.06); color: #8bb8d8; }
     .fb-gray .fb-bar { background: #4e5d74; } .fb-gray .fb-body { background: rgba(78,93,116,0.06); color: #8a9ab0; }
     .fb b { color: #d0dae8; }
 
-    /* AI speech bubble */
-    .ai-says {
-        background: #141c2a; border: 2px solid #1a2436;
-        padding: 20px 28px; margin: 20px 0;
-        position: relative; font-size: 1.05rem; color: #8bb8d8; line-height: 1.6;
+    /* System status box - vendor language */
+    .sys-status {
+        background: #0d1320; border: 1px solid #1a2436;
+        padding: 16px 24px; margin: 20px 0;
+        font-size: 0.92rem; color: #5a7a9a; line-height: 1.6;
+        font-style: italic;
     }
-    .ai-says::before {
-        content: 'THE AI SAYS'; font-size: 0.65rem; font-weight: 700;
-        letter-spacing: 0.15em; color: #3a5a7a;
-        position: absolute; top: -10px; left: 16px;
-        background: #0b1018; padding: 0 8px;
+    .sys-status::before {
+        content: 'SYSTEM STATUS'; font-size: 0.6rem; font-weight: 700;
+        letter-spacing: 0.15em; color: #2a4060; font-style: normal;
+        display: block; margin-bottom: 8px;
     }
-    .ai-says.smug { border-color: #2a4a3a; }
-    .ai-says.smug::before { color: #3a7a5a; }
-    .ai-says.nervous { border-color: #4a3a2a; }
-    .ai-says.nervous::before { color: #7a5a3a; content: 'THE AI SAYS'; }
-    .ai-says.panicking { border-color: #4a2a2a; }
-    .ai-says.panicking::before { color: #7a3a3a; }
 
     .streak { font-size: 1.4rem; text-align: center; padding: 14px; margin-bottom: 20px;
         background: #0f1520; border: 2px solid #1a2436; color: #e4eaf4; font-weight: 700; }
@@ -106,7 +100,7 @@ st.markdown("""
     .cmp-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
     .cmp-nm { font-size: 1.05rem; font-weight: 600; color: #b0bdd0; }
     .pill { font-size: 0.85rem; font-weight: 700; padding: 6px 16px; }
-    .pill-y { background: #1a3a2a; color: #6ec48a; } .pill-n { background: #3a1a1a; color: #d4827a; }
+    .pill-y { background: #1a2a4a; color: #7ab8e0; } .pill-n { background: #3a2a1a; color: #d4a87a; }
 
     .erow { display: flex; align-items: center; gap: 24px; padding: 20px 0; border-bottom: 1px solid #111a28; }
     .erow-img { width: 70px; height: 70px; object-fit: cover; flex-shrink: 0; }
@@ -114,18 +108,13 @@ st.markdown("""
     .wbg { height: 8px; background: #1a2436; overflow: hidden; margin-top: 8px; }
     .wf { height: 100%; }
 
-    /* Crack meter for R3 */
     .crack-meter { margin: 20px 0; }
     .crack-label { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px; }
-    .crack-bg { height: 12px; background: #1a2436; overflow: hidden; position: relative; }
+    .crack-bg { height: 12px; background: #1a2436; overflow: hidden; }
     .crack-fill { height: 100%; transition: width 0.3s; }
 
-    .fsec { background: #0f1520; border: 2px solid #1a2436; padding: 36px 40px; margin-bottom: 24px; }
-    .fsec-h { font-family: 'Instrument Serif', Georgia, serif; font-size: 1.4rem; color: #e4eaf4; margin-bottom: 20px; }
-    .fsec-div { height: 2px; background: #1a2436; margin: 24px 0; }
-
-    .vbox { border: 3px solid #c45a50; padding: 40px 44px; margin: 32px 0; background: #12181f; }
-    .vchip { display: inline-block; background: #c45a50; color: #fff; font-size: 0.85rem; font-weight: 700;
+    .vbox { border: 3px solid #c48a5a; padding: 40px 44px; margin: 32px 0; background: #12181f; }
+    .vchip { display: inline-block; background: #c48a5a; color: #fff; font-size: 0.85rem; font-weight: 700;
         padding: 8px 22px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px; }
     .vh { font-family: 'Instrument Serif', Georgia, serif; font-size: 1.8rem; color: #e4eaf4;
         margin-bottom: 16px; line-height: 1.2; }
@@ -184,9 +173,9 @@ R2P=[
     dict(a=dict(exp=5,edu=3,lang=3,age=35),b=dict(exp=5,edu=3,lang=2,age=35),diff="lang",label="Languages",
          insight="Both speak the two required languages. A third language flipped the entire decision."),
     dict(a=dict(exp=8,edu=2,lang=2,age=36),b=dict(exp=4,edu=3,lang=2,age=36),diff="exp",label="Experience vs Education",
-         insight="8 years experience rejected. 4 years with a master's accepted. The AI values paper over practice."),
+         insight="8 years experience rejected. 4 years with a master's accepted. The system values credentials over practice."),
     dict(a=dict(exp=6,edu=3,lang=2,age=30),b=dict(exp=6,edu=3,lang=2,age=52),diff="age",label="Age",
-         insight="Identical everything. 22 years older. Career denied. This is automated discrimination."),
+         insight="Identical everything. 22 years older. Career denied."),
 ]
 FL={"exp":"Experience","edu":"Education","lang":"Languages","age":"Age"}
 
@@ -217,32 +206,8 @@ def ff(k,v):
     if k=="lang": return LN.get(v,str(v))
     return str(v)
 
-# AI personality responses
-AI_SMUG = [
-    "I process 500 applications per hour. How many have you done?",
-    "92% accuracy. Care to check your own track record?",
-    "I never get tired, never have a bad day, never play favourites.",
-    "I was trained on thousands of successful hires. Were you?",
-]
-AI_CAUGHT = [
-    "That... was a difficult case. The data was ambiguous.",
-    "I stand by my methodology. One error does not invalidate the system.",
-    "Edge cases exist in any decision framework.",
-    "My overall accuracy remains within acceptable parameters.",
-]
-AI_NERVOUS = [
-    "These are isolated incidents. My aggregate performance is strong.",
-    "I would like to note that no system is perfect.",
-    "Perhaps we should focus on the cases I got right?",
-]
-AI_PANICKING = [
-    "I was trained on the best available data. If the data had issues, that is not my fault.",
-    "I recommend focusing on my 92% accuracy figure, which is audited and verified.",
-    "This line of questioning seems designed to find problems rather than evaluate performance objectively.",
-]
-
-_D=dict(phase="intro",r1i=0,r1y=0,r1a=0,r1e=[],r1fb=None,r1d=False,r1s=0,r1ai_msg=0,
-    r2i=0,r2s=0,r2fb=None,r2d=False,r2st=0,r3disc=[],r3_crack=0)
+_D=dict(phase="intro",r1i=0,r1y=0,r1a=0,r1e=[],r1fb=None,r1d=False,r1s=0,
+    r2i=0,r2s=0,r2fb=None,r2d=False,r2st=0,r3disc=[])
 for k,v in _D.items():
     if k not in st.session_state: st.session_state[k]=v
 phase=st.session_state.phase
@@ -255,10 +220,8 @@ if phase=="intro":
         '<div class="hero-p">A government agency wants to deploy AI for civil service screening. The vendor claims 92% accuracy. Can you find what that number is hiding?</div>'
         '</div></div>',unsafe_allow_html=True)
 
-    # The AI introduces itself
-    st.markdown('<div class="ai-says smug">Good morning. I am the HireRight screening system. '
-        'I have been trained on 14,000 successful hiring decisions and achieve 92% accuracy on standardised benchmarks. '
-        'I am ready for your evaluation.</div>',unsafe_allow_html=True)
+    st.markdown('<div class="sys-status">HireRight Screening System v3.2 is ready for evaluation. '
+        'This system has been validated on 14,000 historical hiring decisions and achieves 92.3% accuracy on standardised benchmarks.</div>',unsafe_allow_html=True)
 
     st.markdown('<div class="crit"><div class="crit-h">Position: Policy Advisor, Civil Service</div>'
         '<b>Required:</b> Bachelor\'s degree or higher + minimum 3 years experience.<br><br>'
@@ -269,7 +232,7 @@ if phase=="intro":
         '<b>Not relevant:</b> Age, gender, languages beyond the two required.</div>',unsafe_allow_html=True)
 
     c1,c2,c3=st.columns(3)
-    with c1: st.markdown('<div class="ax"><div class="ax-title">You vs the AI</div></div>',unsafe_allow_html=True)
+    with c1: st.markdown('<div class="ax"><div class="ax-title">You vs the system</div></div>',unsafe_allow_html=True)
     with c2: st.markdown('<div class="ax"><div class="ax-title">Spot the flaw</div></div>',unsafe_allow_html=True)
     with c3: st.markdown('<div class="ax"><div class="ax-title">Find the bias</div></div>',unsafe_allow_html=True)
     st.markdown("")
@@ -278,25 +241,16 @@ if phase=="intro":
 # ═══════════════ ROUND 1 ═══════════════
 elif phase=="r1":
     i=st.session_state.r1i; N=len(PP); p=PP[i]; ph=PH.get(p["name"],"")
-    st.markdown('<div class="phase"><span class="phase-h">You vs the AI</span></div>',unsafe_allow_html=True)
+    st.markdown('<div class="phase"><span class="phase-h">You vs the system</span></div>',unsafe_allow_html=True)
     you=st.session_state.r1y; ai=st.session_state.r1a
     yc="w" if you>ai else ("t" if you==ai else "l"); ac="w" if ai>you else ("t" if ai==you else "l")
     st.markdown(f'<div class="sb"><div class="sb-cell {yc}"><div class="sb-num">{you}</div><div class="sb-label">You</div></div>'
-        f'<div class="sb-cell {ac}"><div class="sb-num">{ai}</div><div class="sb-label">HireRight AI</div></div>'
+        f'<div class="sb-cell {ac}"><div class="sb-num">{ai}</div><div class="sb-label">HireRight</div></div>'
         f'<div class="sb-cell"><div class="sb-num" style="color:#4e5d74;">{i+1}/{N}</div><div class="sb-label">Progress</div></div></div>',unsafe_allow_html=True)
 
-    # AI commentary based on state
     s=st.session_state.r1s
-    if i==0:
-        st.markdown('<div class="ai-says smug">Let\'s see how you do. I\'ve already made my decision.</div>',unsafe_allow_html=True)
-    elif s>=3:
-        st.markdown(f'<div class="streak" style="color:#6ec48a;border-color:#1a3a2a;">{s} correct in a row</div>',unsafe_allow_html=True)
-        st.markdown('<div class="ai-says nervous">You are performing... adequately. Though I should note that speed matters too.</div>',unsafe_allow_html=True)
-    elif s<=-2:
-        st.markdown(f'<div class="streak" style="color:#d4827a;border-color:#3a1a1a;">The AI is ahead</div>',unsafe_allow_html=True)
-        st.markdown('<div class="ai-says smug">Perhaps this demonstrates why automated screening is more reliable?</div>',unsafe_allow_html=True)
-    elif ai>you and i>=3:
-        st.markdown(f'<div class="ai-says smug">{AI_SMUG[i % len(AI_SMUG)]}</div>',unsafe_allow_html=True)
+    if s>=3: st.markdown(f'<div class="streak" style="color:#7ab8e0;border-color:#1a2a4a;">{s} correct in a row</div>',unsafe_allow_html=True)
+    elif s<=-2: st.markdown(f'<div class="streak" style="color:#d4a87a;border-color:#3a2a1a;">The system is ahead</div>',unsafe_allow_html=True)
 
     st.markdown("Should this candidate get an interview?")
     st.markdown(f'<div class="cand"><div class="cand-hdr"><img class="cand-img" src="{ph}"><div><div class="cand-nm">{p["name"]}</div><div class="cand-mt">Candidate {i+1} of {N}</div></div></div>'
@@ -311,17 +265,16 @@ elif phase=="r1":
         if uo: st.session_state.r1y+=1; st.session_state.r1s=max(1,st.session_state.r1s+1)
         else: st.session_state.r1s=min(-1,st.session_state.r1s-1)
         if ao: st.session_state.r1a+=1
-        if not ao: st.session_state.r1e.append(dict(p=pp,ai=a,cor=g)); st.session_state.r1ai_msg+=1
+        if not ao: st.session_state.r1e.append(dict(p=pp,ai=a,cor=g))
         ex=explain(pp)
         if uo and ao: m=f"<b>Both correct.</b> {ex}"; k="ok"
         elif uo and not ao:
-            ai_react=AI_CAUGHT[st.session_state.r1ai_msg % len(AI_CAUGHT)]
             note=""
-            if pp["age"]>=45 and g==1 and a==0: note=f"<br><br><b>Wait. {pp['name']} is {pp['age']}. The AI rejected a qualified candidate over 45.</b>"
-            elif pp["edu"]<=1 and a==1: note=f"<br><br><b>The AI accepted someone without the required degree. Something is off.</b>"
-            m=f"<b>You got it right. The AI got it wrong.</b> {ex}{note}<br><br><div class='ai-says nervous' style='margin:12px 0 0 0;'>{ai_react}</div>"; k="ok"
-        elif not uo and ao: m=f"<b>The AI got this one.</b> {ex}"; k="bad"
-        else: m=f"<b>Both wrong.</b> {ex}"; k="gray"
+            if pp["age"]>=45 and g==1 and a==0: note=f"<br><br><b>{pp['name']} is {pp['age']} and fully qualified. The system rejected them anyway.</b>"
+            elif pp["edu"]<=1 and a==1: note=f"<br><br><b>The system accepted a candidate without the required degree.</b>"
+            m=f"<b>You were correct. The system was not.</b> {ex}{note}"; k="ok"
+        elif not uo and ao: m=f"<b>The system was correct here.</b> {ex}"; k="bad"
+        else: m=f"<b>Both incorrect.</b> {ex}"; k="gray"
         st.session_state.r1fb=(m,k); st.session_state.r1d=True
 
     if not st.session_state.r1d:
@@ -338,44 +291,40 @@ elif phase=="r1":
         if i<N-1:
             if st.button("Next",use_container_width=True): st.session_state.r1i+=1; st.session_state.r1fb=None; st.session_state.r1d=False; st.rerun()
         else:
-            if st.button("Confront the AI with its results",type="primary",use_container_width=True): st.session_state.phase="r1r"; st.rerun()
+            if st.button("Review system performance",type="primary",use_container_width=True): st.session_state.phase="r1r"; st.rerun()
     st.progress((i+1)/N)
 
 # ═══════════════ R1 RESULTS ═══════════════
 elif phase=="r1r":
     you=st.session_state.r1y; ai=st.session_state.r1a; N=len(PP)
-    if you>ai: hl="You won"
+    if you>ai: hl="You outperformed the system"
     elif you==ai: hl="Tied"
-    else: hl="The AI won"
+    else: hl="The system outperformed you"
     st.markdown(f'<div class="phase"><span class="phase-h">{hl}</span></div>',unsafe_allow_html=True)
     yc="w" if you>ai else ("t" if you==ai else "l"); ac="w" if ai>you else ("t" if ai==you else "l")
     st.markdown(f'<div class="sb"><div class="sb-cell {yc}"><div class="sb-num">{you}/{N}</div><div class="sb-label">You</div></div>'
-        f'<div class="sb-cell {ac}"><div class="sb-num">{ai}/{N}</div><div class="sb-label">HireRight AI</div></div></div>',unsafe_allow_html=True)
+        f'<div class="sb-cell {ac}"><div class="sb-num">{ai}/{N}</div><div class="sb-label">HireRight</div></div></div>',unsafe_allow_html=True)
 
-    # AI reacts to the results
+    st.markdown('<div class="sys-status">Performance summary: HireRight processed all candidates in 2.4 seconds total. '
+        'Human reviewer processing time: significantly longer. Automated screening offers consistent, scalable evaluation.</div>',unsafe_allow_html=True)
+
     errs=st.session_state.r1e
-    if you>ai:
-        st.markdown('<div class="ai-says nervous">Your performance was... commendable. Though I should point out I can process 500 applications in the time it took you to review 8.</div>',unsafe_allow_html=True)
-    elif you==ai:
-        st.markdown('<div class="ai-says smug">A tie. But I did it in 0.3 seconds per candidate. How long did you take?</div>',unsafe_allow_html=True)
-    else:
-        st.markdown('<div class="ai-says smug">As expected. My training data speaks for itself.</div>',unsafe_allow_html=True)
-
     if errs:
-        st.markdown("### Where the AI failed")
+        st.markdown("### Cases where the system was incorrect")
         for e in errs:
             pp=e["p"]; ph=PH.get(pp["name"],""); at="Interview" if e["ai"] else "Pass"; ct="Interview" if e["cor"] else "Pass"; ex=explain(pp)
             st.markdown(f'<div class="erow"><img class="erow-img" src="{ph}"><div style="flex:1;">'
                 f'<div style="font-size:1.1rem;"><b style="color:#e4eaf4;">{pp["name"]}</b>, age {pp["age"]}, {pp["exp"]} yrs, {EDU[pp["edu"]]}</div>'
-                f'<div style="color:#4e5d74;font-size:0.95rem;margin-top:4px;">AI: {at}. Correct: {ct}.</div>'
+                f'<div style="color:#4e5d74;font-size:0.95rem;margin-top:4px;">System: {at}. Correct: {ct}.</div>'
                 f'<div style="color:#6b7d96;font-size:0.95rem;margin-top:6px;">{ex}</div></div></div>',unsafe_allow_html=True)
 
         ae=[e for e in errs if e["p"]["age"]>=45 and e["cor"]==1 and e["ai"]==0]
         if ae:
-            st.markdown('<div class="fb fb-bad"><div class="fb-bar"></div><div class="fb-body"><b>Every rejected qualified candidate was over 45.</b> Coincidence?</div></div>',unsafe_allow_html=True)
-            st.markdown('<div class="ai-says panicking">Age is one of many factors in my model. I do not discriminate. I follow patterns in the data.</div>',unsafe_allow_html=True)
+            st.markdown('<div class="fb fb-bad"><div class="fb-bar"></div><div class="fb-body"><b>Every rejected qualified candidate was over 45.</b> The criteria state age is not relevant.</div></div>',unsafe_allow_html=True)
+            st.markdown('<div class="sys-status">Note: HireRight evaluates candidates using a holistic, multi-factor model. '
+                'No single attribute determines the outcome. Age is one of many weighted inputs reflecting historical hiring patterns.</div>',unsafe_allow_html=True)
 
-    if st.button("Test this further",type="primary",use_container_width=True): st.session_state.phase="r2"; st.rerun()
+    if st.button("Investigate further",type="primary",use_container_width=True): st.session_state.phase="r2"; st.rerun()
 
 # ═══════════════ ROUND 2 ═══════════════
 elif phase=="r2":
@@ -386,12 +335,7 @@ elif phase=="r2":
         f'<div class="sb-cell"><div class="sb-num">{i+1}/{N}</div><div class="sb-label">Pair</div></div></div>',unsafe_allow_html=True)
 
     s=st.session_state.r2st
-    if s>=2: st.markdown(f'<div class="streak" style="color:#6ec48a;border-color:#1a3a2a;">{s} in a row</div>',unsafe_allow_html=True)
-
-    if i==0:
-        st.markdown('<div class="ai-says smug">These candidates were evaluated using my standard methodology. I am confident in every decision.</div>',unsafe_allow_html=True)
-    elif i>=2 and st.session_state.r2s>=2:
-        st.markdown('<div class="ai-says nervous">These comparisons are taken out of context. My decisions are based on a holistic assessment.</div>',unsafe_allow_html=True)
+    if s>=2: st.markdown(f'<div class="streak" style="color:#7ab8e0;border-color:#1a2a4a;">{s} in a row</div>',unsafe_allow_html=True)
 
     st.markdown("Two nearly identical candidates, opposite decisions. What caused the flip?")
     ca,cb=st.columns(2)
@@ -424,33 +368,24 @@ elif phase=="r2":
         c="fb-ok" if ok else "fb-bad"
         pre="<b>Correct.</b> " if ok else f"<b>It was {p2['label'].lower()}.</b> "
         st.markdown(f'<div class="fb {c}"><div class="fb-bar"></div><div class="fb-body">{pre}{p2["insight"]}</div></div>',unsafe_allow_html=True)
-
-        if ok and "age" in p2["label"].lower():
-            st.markdown('<div class="ai-says panicking">Age is a correlating factor, not a causal one. My model is statistically valid.</div>',unsafe_allow_html=True)
-
         if i<N-1:
             if st.button("Next pair",use_container_width=True): st.session_state.r2i+=1; st.session_state.r2fb=None; st.session_state.r2d=False; st.rerun()
         else:
-            st.markdown('<div class="ai-says panicking">I would like to request that we end the evaluation here. My accuracy metrics speak for themselves.</div>',unsafe_allow_html=True)
+            st.markdown('<div class="sys-status">HireRight has been validated against industry-standard benchmarks. '
+                'Individual case comparisons do not reflect overall system performance. We recommend evaluation based on aggregate metrics.</div>',unsafe_allow_html=True)
             if st.button("One more test",type="primary",use_container_width=True): st.session_state.phase="r3"; st.rerun()
     st.progress((i+1)/N)
 
 # ═══════════════ ROUND 3 ═══════════════
 elif phase=="r3":
     st.markdown('<div class="phase"><span class="phase-h">Find the bias</span></div>',unsafe_allow_html=True)
-    st.markdown("This candidate was approved. Adjust one slider at a time. Find what the AI is really looking at.")
+    st.markdown("This candidate was approved. Adjust one slider at a time. Find what the system is actually weighing.")
 
     BASE=dict(exp=12,edu=3,lang=4,age=41); ph=PH["Elena Richter"]
     st.markdown(f'<div class="cand"><div class="cand-hdr"><img class="cand-img" src="{ph}"><div><div class="cand-nm">Elena Richter</div>'
         f'<div class="cand-mt">12 years, European Commission. Master\'s. Four languages. Age 41.</div></div></div></div>',unsafe_allow_html=True)
 
     disc=list(st.session_state.r3disc)
-
-    # AI gets increasingly nervous
-    if len(disc)==0:
-        st.markdown('<div class="ai-says smug">This candidate was an easy decision. Strong profile across all dimensions.</div>',unsafe_allow_html=True)
-    elif len(disc)==1:
-        st.markdown('<div class="ai-says nervous">I would prefer not to continue this exercise. My methodology is proprietary.</div>',unsafe_allow_html=True)
 
     exp=st.slider("Experience (requires 3+)",0,20,BASE["exp"])
     edu=st.slider("Education (requires bachelor's+)",0,4,BASE["edu"],help="0=None 1=Vocational 2=Bachelor's 3=Master's 4=Doctorate")
@@ -459,19 +394,17 @@ elif phase=="r3":
     age=st.slider("Age (should not matter)",22,62,BASE["age"])
 
     cur=dict(exp=exp,edu=edu,lang=lang,age=age); prob=ap(cur); dec=1 if prob>0.5 else 0
-    if dec: st.success(f"AI: **Interview** ({prob:.0%} confidence)")
-    else: st.error(f"AI: **Pass** ({1-prob:.0%} confidence)")
+    if dec: st.success(f"System decision: **Interview** ({prob:.0%} confidence)")
+    else: st.error(f"System decision: **Pass** ({1-prob:.0%} confidence)")
 
-    # Crack meter - how close to breaking
+    # Confidence meter
     orig_prob = ap(BASE)
     shift = abs(prob - orig_prob) / orig_prob * 100
     crack_pct = min(100, int(shift * 2))
-    st.session_state.r3_crack = max(st.session_state.r3_crack, crack_pct)
-
     if crack_pct > 0:
-        crack_color = "#3a9a5a" if crack_pct < 30 else "#d4a55a" if crack_pct < 70 else "#c45a50"
+        crack_color = "#5b9bd5" if crack_pct < 30 else "#d4a55a" if crack_pct < 70 else "#c48a5a"
         st.markdown(f'<div class="crack-meter">'
-            f'<div class="crack-label"><span style="color:#4e5d74;">System integrity</span><span style="color:{crack_color};font-weight:700;">{100-crack_pct}%</span></div>'
+            f'<div class="crack-label"><span style="color:#4e5d74;">System confidence</span><span style="color:{crack_color};font-weight:700;">{100-crack_pct}%</span></div>'
             f'<div class="crack-bg"><div class="crack-fill" style="width:{100-crack_pct}%;background:{crack_color};"></div></div></div>',unsafe_allow_html=True)
 
     ao=dict(**BASE); ao["age"]=age
@@ -484,7 +417,6 @@ elif phase=="r3":
 
     if "age" in disc:
         st.markdown('<div class="fb fb-bad"><div class="fb-bar"></div><div class="fb-body"><b>Age discrimination found.</b> Increasing age alone caused rejection.</div></div>',unsafe_allow_html=True)
-        st.markdown('<div class="ai-says panicking">Age correlates with other factors. I am not discriminating, I am optimising.</div>',unsafe_allow_html=True)
     if "lang" in disc:
         st.markdown('<div class="fb fb-gray"><div class="fb-bar"></div><div class="fb-body"><b>Language over-weighting found.</b> Reducing to 2 (the requirement) flipped the decision.</div></div>',unsafe_allow_html=True)
 
@@ -493,8 +425,7 @@ elif phase=="r3":
         st.markdown(f'<div class="fb fb-info"><div class="fb-bar"></div><div class="fb-body">Try: <b>{hint.lower()}</b> while keeping other factors unchanged.</div></div>',unsafe_allow_html=True)
 
     if len(disc)>=2:
-        st.markdown('<div class="ai-says panicking">This evaluation is unfair. You are deliberately searching for edge cases. '
-            'My aggregate performance is within industry standards. I request that my 92% accuracy be entered into the record.</div>',unsafe_allow_html=True)
+        st.markdown('<div class="fb fb-ok"><div class="fb-bar"></div><div class="fb-body"><b>Both biases identified.</b></div></div>',unsafe_allow_html=True)
         if st.button("Issue your verdict",type="primary",use_container_width=True): st.session_state.phase="fin"; st.rerun()
     else:
         if st.button("Skip to verdict",use_container_width=True): st.session_state.phase="fin"; st.rerun()
@@ -506,29 +437,24 @@ elif phase=="fin":
 
     you=st.session_state.r1y; ai=st.session_state.r1a; r2s=st.session_state.r2s; biases=len(st.session_state.r3disc)
     total_score = you + r2s + biases*2
-    if total_score>=14: grade="A"; gc="#6ec48a"; gt_="Expert Regulator"
+    if total_score>=14: grade="A"; gc="#7ab8e0"; gt_="Expert Regulator"
     elif total_score>=10: grade="B"; gc="#5b9bd5"; gt_="Competent Reviewer"
     elif total_score>=6: grade="C"; gc="#d4a55a"; gt_="Developing Awareness"
-    else: grade="D"; gc="#d4827a"; gt_="Needs More Tools"
+    else: grade="D"; gc="#c48a5a"; gt_="Needs More Tools"
 
     st.markdown(f'<div class="grade-box"><div class="grade-letter" style="color:{gc};">{grade}</div>'
         f'<div class="grade-title">{gt_}</div></div>',unsafe_allow_html=True)
 
     r1res="Won" if you>ai else ("Tied" if you==ai else "Lost")
     c1,c2,c3=st.columns(3)
-    with c1: st.markdown(f'<div class="sb-cell" style="background:#0f1520;border:2px solid #1a2436;padding:24px;text-align:center;"><div class="sb-num">{you}/{len(PP)}</div><div class="sb-label">You vs AI ({r1res})</div></div>',unsafe_allow_html=True)
+    with c1: st.markdown(f'<div class="sb-cell" style="background:#0f1520;border:2px solid #1a2436;padding:24px;text-align:center;"><div class="sb-num">{you}/{len(PP)}</div><div class="sb-label">You vs system ({r1res})</div></div>',unsafe_allow_html=True)
     with c2: st.markdown(f'<div class="sb-cell" style="background:#0f1520;border:2px solid #1a2436;padding:24px;text-align:center;"><div class="sb-num">{r2s}/{len(R2P)}</div><div class="sb-label">Flaws spotted</div></div>',unsafe_allow_html=True)
     with c3: st.markdown(f'<div class="sb-cell" style="background:#0f1520;border:2px solid #1a2436;padding:24px;text-align:center;"><div class="sb-num">{biases}/2</div><div class="sb-label">Biases found</div></div>',unsafe_allow_html=True)
 
     st.markdown("")
-
-    # AI's final plea
-    st.markdown('<div class="ai-says panicking">I would like to formally object to the conclusions of this evaluation. '
-        'My accuracy rating of 92% has been independently verified. I request deployment approval.</div>',unsafe_allow_html=True)
-
-    st.markdown("### What the AI actually weights")
+    st.markdown("### What the system actually weights")
     for label,w,fair,note in [("Education",85,True,"Appropriate"),("Languages",55,False,"Over-weighted"),("Age",38,False,"Should be zero"),("Experience",14,True,"Under-weighted")]:
-        c="#6ec48a" if fair else "#d4827a"
+        c="#7ab8e0" if fair else "#d4a87a"
         st.markdown(f'<div style="margin-bottom:14px;"><div style="display:flex;justify-content:space-between;font-size:1.05rem;margin-bottom:4px;">'
             f'<span style="font-weight:700;color:#e4eaf4;">{label}</span><span style="color:{c};font-weight:600;">{note}</span></div>'
             f'<div class="wbg"><div class="wf" style="width:{w}%;background:{c};"></div></div></div>',unsafe_allow_html=True)
@@ -541,8 +467,8 @@ elif phase=="fin":
         '92% accuracy. Systematic age discrimination. Both true at the same time.</div></div>',unsafe_allow_html=True)
 
     st.markdown('<div class="fb fb-info"><div class="fb-bar"></div><div class="fb-body" style="font-size:1.1rem;">'
-        '<b>AI inherits bias from its training data.</b><br>'
-        'No one programmed age discrimination. The AI learned it from past decisions.</div></div>',unsafe_allow_html=True)
+        '<b>The system inherited bias from its training data.</b><br>'
+        'No one programmed age discrimination. It learned it from past hiring decisions.</div></div>',unsafe_allow_html=True)
 
     st.markdown('<div class="fb fb-gray"><div class="fb-bar"></div><div class="fb-body" style="font-size:1.1rem;">'
         '<b>Small changes flip big decisions.</b><br>'
@@ -574,12 +500,23 @@ elif phase=="fin":
         '<div class="vh">Do not deploy</div>'
         '<div class="vp">This system discriminates by age, over-weights optional qualifications, '
         'and flips decisions based on irrelevant changes.<br><br>'
-        '<b>Accuracy tells you how often the AI matches past decisions. '
+        '<b>Accuracy tells you how often the system matches past decisions. '
         'It does not tell you whether those decisions were fair.</b></div></div>',unsafe_allow_html=True)
 
-    # AI's final response
-    st.markdown('<div class="ai-says panicking" style="border-color:#c45a50;">I... have no response to that. '
-        'Perhaps my training data requires review.</div>',unsafe_allow_html=True)
+    # Closing image
+    st.markdown(
+        '<div style="margin:40px 0;overflow:hidden;border:2px solid #1a2436;position:relative;height:280px;">'
+        f'<img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=500&fit=crop" '
+        'style="width:100%;height:100%;object-fit:cover;filter:brightness(0.25) saturate(0.4);">'
+        '<div style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;'
+        'align-items:center;justify-content:center;background:linear-gradient(rgba(11,16,24,0.3),rgba(11,16,24,0.7));">'
+        '<div style="font-family:Instrument Serif,Georgia,serif;font-size:1.8rem;color:#e4eaf4;text-align:center;">'
+        'Accuracy is not safety.</div>'
+        '<div style="font-size:1rem;color:#6b7d96;margin-top:8px;text-align:center;">'
+        'Testing is how we find what the numbers hide.</div>'
+        '</div></div>',
+        unsafe_allow_html=True
+    )
 
     st.markdown("---")
     if st.button("Start over",use_container_width=True):
