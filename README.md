@@ -6,7 +6,7 @@ Built as a prototype:
 
 ## The scenario
 
-A government agency wants to deploy AI to screen job applications for civil service positions. The vendor says it's 92% accurate. You're the regulator — should it be deployed?
+A government agency wants to deploy AI to screen job applications for civil service positions. The vendor says it's 92% accurate. You're the regulator. Should it be deployed?
 
 ## Run locally
 
@@ -24,8 +24,8 @@ streamlit run app.py
 
 ## Tech stack
 
-- **Streamlit** — Interactive web framework
-- **NumPy** — Model computations
+- **Streamlit** Interactive web framework
+- **NumPy**  Model computations
 
 ## License
 
