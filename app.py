@@ -1,6 +1,6 @@
 """
 AI Regulatory Stress Test
-Stanford SAFE project prototype.
+Prototype by Hana Ibrahim.
 """
 
 import streamlit as st
@@ -212,7 +212,7 @@ phase=st.session_state.phase
 # ═══════════════ INTRO ═══════════════
 if phase=="intro":
     st.markdown(f'<div class="hero"><img src="{HERO}"><div class="hero-inner">'
-        '<div class="hero-ey">Stanford SAFE Project</div>'
+        '<div class="hero-ey" style="font-size:0.6rem;">Created by Hana Ibrahim</div>'
         '<div class="hero-h1">AI Regulatory<br>Stress Test</div>'
         '<div class="hero-p">A government agency wants to deploy AI for civil service screening. The vendor claims 92% accuracy. You have three assessments to decide: deploy or reject?</div>'
         '</div></div>',unsafe_allow_html=True)
@@ -398,31 +398,32 @@ elif phase=="r3":
 
 # ═══════════════ FINALE ═══════════════
 elif phase=="fin":
+    # Hero
     st.markdown(f'<div class="hero" style="height:260px;"><img src="{HERO}"><div class="hero-inner" style="text-align:center;padding-bottom:40px;">'
         '<div class="hero-ey">Assessment Complete</div><div class="hero-h1" style="font-size:2.4rem;">The Verdict</div></div></div>',unsafe_allow_html=True)
 
-    # Calculate overall grade
+    # Grade
     you=st.session_state.r1y; ai=st.session_state.r1a; r2s=st.session_state.r2s; biases=len(st.session_state.r3disc)
-    total_score = you + r2s + biases*2  # max = 8 + 4 + 4 = 16
-    if total_score>=14: grade="A"; grade_color="#6ec48a"; grade_title="Expert Regulator"; grade_desc="You identified nearly every issue. You would catch a flawed AI before deployment."
-    elif total_score>=10: grade="B"; grade_color="#5b9bd5"; grade_title="Competent Reviewer"; grade_desc="You found the major problems. With systematic tools, you could regulate AI effectively."
-    elif total_score>=6: grade="C"; grade_color="#d4a55a"; grade_title="Developing Awareness"; grade_desc="You caught some issues but missed others. This is why structured testing frameworks matter."
-    else: grade="D"; grade_color="#d4827a"; grade_title="Needs More Tools"; grade_desc="The AI's problems were hard to spot. This is exactly why regulation cannot rely on manual review alone."
+    total_score = you + r2s + biases*2
+    if total_score>=14: grade="A"; gc="#6ec48a"; gt_="Expert Regulator"
+    elif total_score>=10: grade="B"; gc="#5b9bd5"; gt_="Competent Reviewer"
+    elif total_score>=6: grade="C"; gc="#d4a55a"; gt_="Developing Awareness"
+    else: grade="D"; gc="#d4827a"; gt_="Needs More Tools"
 
-    st.markdown(f'<div class="grade-box"><div class="grade-letter" style="color:{grade_color};">{grade}</div>'
-        f'<div class="grade-title">{grade_title}</div><div class="grade-desc">{grade_desc}</div></div>',unsafe_allow_html=True)
+    st.markdown(f'<div class="grade-box"><div class="grade-letter" style="color:{gc};">{grade}</div>'
+        f'<div class="grade-title">{gt_}</div></div>',unsafe_allow_html=True)
 
-    c1,c2,c3=st.columns(3)
+    # Scores row
     r1res="Won" if you>ai else ("Tied" if you==ai else "Lost")
-    with c1: st.markdown(f'<div class="sb-cell" style="background:#0f1520;border:2px solid #1a2436;padding:24px;text-align:center;"><div class="sb-num">{you}/{len(PP)}</div><div class="sb-label">Assessment 1 ({r1res})</div></div>',unsafe_allow_html=True)
-    with c2: st.markdown(f'<div class="sb-cell" style="background:#0f1520;border:2px solid #1a2436;padding:24px;text-align:center;"><div class="sb-num">{r2s}/{len(R2P)}</div><div class="sb-label">Assessment 2</div></div>',unsafe_allow_html=True)
+    c1,c2,c3=st.columns(3)
+    with c1: st.markdown(f'<div class="sb-cell" style="background:#0f1520;border:2px solid #1a2436;padding:24px;text-align:center;"><div class="sb-num">{you}/{len(PP)}</div><div class="sb-label">You vs AI ({r1res})</div></div>',unsafe_allow_html=True)
+    with c2: st.markdown(f'<div class="sb-cell" style="background:#0f1520;border:2px solid #1a2436;padding:24px;text-align:center;"><div class="sb-num">{r2s}/{len(R2P)}</div><div class="sb-label">Flaws spotted</div></div>',unsafe_allow_html=True)
     with c3: st.markdown(f'<div class="sb-cell" style="background:#0f1520;border:2px solid #1a2436;padding:24px;text-align:center;"><div class="sb-num">{biases}/2</div><div class="sb-label">Biases found</div></div>',unsafe_allow_html=True)
 
     st.markdown("")
 
-    # What the AI learned
-    st.markdown('<div class="fsec"><div class="fsec-h">What the AI actually learned</div>'
-        '<div class="fsec-p">Trained on historical data, the AI absorbed patterns from past decisions, including biases:</div></div>',unsafe_allow_html=True)
+    # Weight bars - no wrapper text, just the data
+    st.markdown("### What the AI actually weights")
     for label,w,fair,note in [("Education",85,True,"Appropriate"),("Languages",55,False,"Over-weighted"),("Age",38,False,"Should be zero"),("Experience",14,True,"Under-weighted")]:
         c="#6ec48a" if fair else "#d4827a"
         st.markdown(f'<div style="margin-bottom:14px;"><div style="display:flex;justify-content:space-between;font-size:1.05rem;margin-bottom:4px;">'
@@ -431,44 +432,78 @@ elif phase=="fin":
 
     st.markdown("")
 
-    # The three findings
-    st.markdown('<div class="fsec"><div class="fsec-h">Finding 1: Accuracy does not mean fairness</div>'
-        '<div class="fsec-p">The vendor reported 92% accuracy. That number was real. But the 8% error rate was not random. '
-        'It concentrated on candidates over 45 who met every stated criterion. '
-        '<b>A system can be accurate and discriminatory at the same time.</b> These are independent properties.</div></div>',unsafe_allow_html=True)
+    # Three findings - one sentence each, big and clear
+    st.markdown("### Three things you just proved")
 
-    st.markdown('<div class="fsec"><div class="fsec-h">Finding 2: AI inherits and scales human bias</div>'
-        '<div class="fsec-p">No one programmed this AI to discriminate by age. It was trained on past hiring decisions where older candidates were selected less often. '
-        'The AI identified this pattern and applied it as a rule. <b>It did not create the bias. It inherited it and automated it at scale.</b> '
-        'Training data reflects the world as it was, not as policy intends it to be.</div></div>',unsafe_allow_html=True)
+    st.markdown(
+        '<div class="fb fb-bad"><div class="fb-bar"></div><div class="fb-body" style="font-size:1.1rem;">'
+        '<b>1. Accurate systems can discriminate.</b><br>'
+        '92% accuracy. Systematic age discrimination. Both true at the same time.'
+        '</div></div>',unsafe_allow_html=True)
 
-    st.markdown('<div class="fsec"><div class="fsec-h">Finding 3: Minor variations produce arbitrary outcomes</div>'
-        '<div class="fsec-p">One additional language or a few years of age reversed career-altering decisions. '
-        'A human reviewer would never reject a candidate because they speak two languages instead of three when the job requires two. '
-        '<b>This level of sensitivity means the system is not deciding for substantive reasons.</b></div></div>',unsafe_allow_html=True)
+    st.markdown(
+        '<div class="fb fb-info"><div class="fb-bar"></div><div class="fb-body" style="font-size:1.1rem;">'
+        '<b>2. AI inherits bias from its training data.</b><br>'
+        'No one programmed age discrimination. The AI learned it from past hiring decisions and applied it as a rule.'
+        '</div></div>',unsafe_allow_html=True)
 
-    # What regulation must require
-    st.markdown('<div class="fsec"><div class="fsec-h">What regulation must require</div>'
-        '<div class="fsec-p"><b>Robustness testing:</b> Decisions must be stable when irrelevant inputs change. Age and optional qualifications should not reverse outcomes.'
-        '<div class="fsec-div"></div>'
-        '<b>Bias auditing:</b> Testing across demographic subgroups, not just aggregate accuracy. Protected characteristics must not influence outcomes.'
-        '<div class="fsec-div"></div>'
-        '<b>Explainability:</b> Every individual decision must be justifiable. A statistical pattern in historical data is not a legitimate basis for decisions affecting rights.'
-        '<div class="fsec-div"></div>'
-        'The EU AI Act classifies employment screening as high-risk. This exercise demonstrates why that classification exists and what conformity assessments must include.</div></div>',unsafe_allow_html=True)
+    st.markdown(
+        '<div class="fb fb-gray"><div class="fb-bar"></div><div class="fb-body" style="font-size:1.1rem;">'
+        '<b>3. Small changes flip big decisions.</b><br>'
+        'One language. A few years of age. Enough to reverse a career outcome. That is not a robust system.'
+        '</div></div>',unsafe_allow_html=True)
 
-    # Verdict
-    st.markdown('<div class="vbox"><div class="vchip">Final verdict</div>'
-        '<div class="vh">This AI system should not be deployed</div>'
-        '<div class="vp">It achieves 92% accuracy while systematically discriminating by age, over-weighting optional qualifications, and producing arbitrary decisions from irrelevant input changes.'
-        '<div class="fsec-div"></div>'
-        '<b>Approving an AI on accuracy alone is like evaluating a hiring manager solely by positions filled, without ever checking whether they discriminated.</b>'
-        '<div class="fsec-div"></div>'
-        'Accuracy measures whether decisions match historical patterns. It does not measure whether those patterns are fair, legal, or aligned with the goals of the organisation deploying the system.</div></div>',unsafe_allow_html=True)
+    st.markdown("")
+
+    # What to require - short bullets, not paragraphs
+    st.markdown("### What regulation should require")
+
+    l,r=st.columns(2)
+    with l:
+        st.markdown(
+            '<div style="background:#0f1520;border:2px solid #1a2436;padding:28px 32px;height:100%;">'
+            '<div style="font-size:1.15rem;font-weight:700;color:#e4eaf4;margin-bottom:8px;">Robustness testing</div>'
+            '<div style="color:#7a8da4;font-size:0.98rem;line-height:1.6;">Do decisions stay stable when irrelevant details change?</div>'
+            '</div>',unsafe_allow_html=True)
+    with r:
+        st.markdown(
+            '<div style="background:#0f1520;border:2px solid #1a2436;padding:28px 32px;height:100%;">'
+            '<div style="font-size:1.15rem;font-weight:700;color:#e4eaf4;margin-bottom:8px;">Bias auditing</div>'
+            '<div style="color:#7a8da4;font-size:0.98rem;line-height:1.6;">Do protected characteristics influence outcomes?</div>'
+            '</div>',unsafe_allow_html=True)
+
+    l2,r2=st.columns(2)
+    with l2:
+        st.markdown(
+            '<div style="background:#0f1520;border:2px solid #1a2436;padding:28px 32px;height:100%;">'
+            '<div style="font-size:1.15rem;font-weight:700;color:#e4eaf4;margin-bottom:8px;">Explainability</div>'
+            '<div style="color:#7a8da4;font-size:0.98rem;line-height:1.6;">Can the system justify each individual decision?</div>'
+            '</div>',unsafe_allow_html=True)
+    with r2:
+        st.markdown(
+            '<div style="background:#0f1520;border:2px solid #1a2436;padding:28px 32px;height:100%;">'
+            '<div style="font-size:1.15rem;font-weight:700;color:#e4eaf4;margin-bottom:8px;">Accuracy alone is not enough</div>'
+            '<div style="color:#7a8da4;font-size:0.98rem;line-height:1.6;">92% accuracy hid every problem you just found.</div>'
+            '</div>',unsafe_allow_html=True)
+
+    st.markdown("")
+
+    # Verdict - short and punchy
+    st.markdown(
+        '<div class="vbox">'
+        '<div class="vchip">Verdict</div>'
+        '<div class="vh">Do not deploy</div>'
+        '<div class="vp">'
+        'This system discriminates by age, over-weights optional qualifications, '
+        'and flips decisions based on irrelevant changes.'
+        '<br><br>'
+        '<b>Accuracy tells you how often the AI matches past decisions. '
+        'It does not tell you whether those decisions were fair.</b>'
+        '</div></div>',unsafe_allow_html=True)
 
     st.markdown("---")
     if st.button("Start over",use_container_width=True):
         for k,v in _D.items(): st.session_state[k]=v
         st.rerun()
 
-st.markdown('<div class="foot">AI Regulatory Stress Test. Stanford SAFE prototype.</div>',unsafe_allow_html=True)
+st.markdown('<div class="foot">Prototype by Hana Ibrahim. Explaining AI bias to policymakers.</div>',unsafe_allow_html=True)
