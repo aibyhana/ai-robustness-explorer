@@ -19,7 +19,7 @@ st.markdown("""
             radial-gradient(ellipse at 90% 100%, rgba(20,55,95,0.15) 0%, transparent 45%),
             url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 30h60M30 0v60' stroke='rgba(255,255,255,0.02)' stroke-width='1'/%3E%3C/svg%3E");
     }
-    * { font-family: 'Karla', sans-serif !important; border-radius: 0 !important; }
+    * { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important; }
     .stMarkdown, .stMarkdown p, .stMarkdown li, .stMarkdown span, label, .stSlider label {
         color: #b0bdd0 !important; font-size: 1.05rem !important; line-height: 1.7 !important;
     }
