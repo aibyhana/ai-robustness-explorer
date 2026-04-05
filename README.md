@@ -9,28 +9,6 @@ Built as a prototype for the [Stanford SAFE](https://saige.stanford.edu) project
 
 A government agency wants to deploy AI to screen job applications for civil service positions. The vendor says it's 92% accurate. You're the regulator — should it be deployed?
 
-## Three rounds
-
-1. **You vs. the AI** — Review candidates and decide: interview or pass? Compare your judgment to the AI's, then examine its mistakes.
-2. **Spot the flaw** — Two nearly identical candidates got opposite decisions. Find what tiny detail caused the flip. Discover that age alone can reverse the AI's decision.
-3. **Find the bias** — Adjust a candidate's CV with sliders and uncover what the AI really cares about — including factors the job description says should not matter.
-
-## Key concepts demonstrated
-
-- **Accuracy ≠ fairness**: A system can be 92% accurate and still discriminate
-- **Inherited bias**: AI trained on historical data reproduces historical discrimination at scale
-- **Robustness failures**: Tiny, meaningless changes (1 year of age, 1 language) flip life-altering decisions
-- **Why testing must go beyond accuracy**: Bias auditing, robustness testing, and explainability requirements
-
-## The hidden model
-
-The AI has a logistic regression with intentional biases:
-- **Over-penalizes age** (learned from historical data where older candidates were hired less)
-- **Over-weights languages** (treats a 3rd language as essential when the job only requires 2)
-- **Under-values experience** relative to formal education
-
-The ground truth uses fair rules matching the job description: bachelor's + 3 years, or master's + 2 years, with age having zero weight.
-
 ## Run locally
 
 ```bash
