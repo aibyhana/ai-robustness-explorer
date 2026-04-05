@@ -1,9 +1,8 @@
-# 🔬 Can You Regulate This AI?
+# Can You Regulate This AI?
 
 **An interactive challenge for policymakers to discover how AI systems can be accurate and discriminatory at the same time.**
 
-Built as a prototype for the [Stanford SAFE](https://saige.stanford.edu) project:
-*"Designing Interactive Modules to Introduce High-Ranking Decision Makers to Technical AI Fundamentals"*
+Built as a prototype:
 
 ## The scenario
 
